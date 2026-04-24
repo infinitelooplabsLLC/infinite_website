@@ -67,7 +67,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       seamSvg.style.top = topOffset + 'px';
       seamSvg.setAttribute('height', h);
 
-      const cx = 12, amp = 6, period = 110;
+      const cx = 12, amp = 10, period = 72;
       const count = Math.ceil(h / period);
       let d = `M ${cx} 0`;
       for (let i = 0; i < count; i++) {
