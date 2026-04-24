@@ -53,15 +53,14 @@ document.getElementById('year').textContent = new Date().getFullYear();
     let pathLength = 0;
 
     function buildSeam() {
-      const stanzas = document.querySelectorAll('.stanza');
-      const first = stanzas[0];
-      const last = stanzas[stanzas.length - 1];
+      const first = document.querySelector('.stanza');
+      const last = document.querySelector('.line.is-final');
 
       const mainRect = main.getBoundingClientRect();
       const firstRect = first.getBoundingClientRect();
       const lastRect = last.getBoundingClientRect();
 
-      // position SVG to span exactly first stanza top → last stanza bottom
+      // position SVG from first stanza top → bottom of "refining. always."
       const topOffset = firstRect.top - mainRect.top;
       const h = lastRect.bottom - firstRect.top;
 
