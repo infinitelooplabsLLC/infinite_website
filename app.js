@@ -1,4 +1,3 @@
-// infinite loop labs — runtime
 document.getElementById('year').textContent = new Date().getFullYear();
 
 (() => {
@@ -25,7 +24,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
     });
   }
 
-  // stanza fade-in
   const targets = document.querySelectorAll('.stanza, .footer');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -44,7 +42,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
     targets.forEach((t) => t.classList.add('is-in'));
   }
 
-  // gold seam — draw on scroll
   const seamSvg = document.getElementById('seam-svg');
   const seamPath = document.getElementById('seam-path');
   const main = document.querySelector('.main');
@@ -60,7 +57,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
       const firstRect = first.getBoundingClientRect();
       const lastRect = last.getBoundingClientRect();
 
-      // position SVG from first stanza top → bottom of "refining. always."
       const topOffset = firstRect.top - mainRect.top;
       const h = lastRect.bottom - firstRect.top;
 
@@ -82,7 +78,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
       seamPath.setAttribute('d', d);
       pathLength = seamPath.getTotalLength();
       seamPath.style.strokeDasharray = pathLength;
-      // start fully hidden — scroll drives the reveal
       seamPath.style.strokeDashoffset = pathLength;
     }
 
@@ -94,7 +89,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }
 
     buildSeam();
-    // do NOT call updateSeam() on load — seam stays hidden until scroll
+    // updateSeam intentionally not called on load — seam is hidden until the user scrolls
 
     window.addEventListener('scroll', updateSeam, { passive: true });
 
