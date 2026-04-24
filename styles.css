@@ -160,9 +160,9 @@ html[data-theme="light"] .theme-icon-moon { display: none;  }
 #seam-path {
   fill: none;
   stroke: var(--gold);
-  stroke-width: 1.5;
+  stroke-width: 0.8;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 4px var(--gold));
+  filter: drop-shadow(0 0 3px var(--gold));
 }
 
 .stanza {

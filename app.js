@@ -53,10 +53,21 @@ document.getElementById('year').textContent = new Date().getFullYear();
     let pathLength = 0;
 
     function buildSeam() {
-      const h = main.scrollHeight;
+      const stanzas = document.querySelectorAll('.stanza');
+      const first = stanzas[0];
+      const last = stanzas[stanzas.length - 1];
+
+      const mainRect = main.getBoundingClientRect();
+      const firstRect = first.getBoundingClientRect();
+      const lastRect = last.getBoundingClientRect();
+
+      // position SVG to span exactly first stanza top → last stanza bottom
+      const topOffset = firstRect.top - mainRect.top;
+      const h = lastRect.bottom - firstRect.top;
+
+      seamSvg.style.top = topOffset + 'px';
       seamSvg.setAttribute('height', h);
 
-      // wavy path: S-curves down the left edge
       const cx = 12, amp = 6, period = 110;
       const count = Math.ceil(h / period);
       let d = `M ${cx} 0`;
@@ -70,19 +81,19 @@ document.getElementById('year').textContent = new Date().getFullYear();
       seamPath.setAttribute('d', d);
       pathLength = seamPath.getTotalLength();
       seamPath.style.strokeDasharray = pathLength;
+      // start fully hidden — scroll drives the reveal
       seamPath.style.strokeDashoffset = pathLength;
     }
 
     function updateSeam() {
       if (!pathLength) return;
-      const mainTop = main.getBoundingClientRect().top + window.scrollY;
-      const scrolled = window.scrollY - mainTop + window.innerHeight * 0.65;
-      const progress = Math.max(0, Math.min(1, scrolled / main.scrollHeight));
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       seamPath.style.strokeDashoffset = pathLength * (1 - progress);
     }
 
     buildSeam();
-    updateSeam();
+    // do NOT call updateSeam() on load — seam stays hidden until scroll
 
     window.addEventListener('scroll', updateSeam, { passive: true });
 
