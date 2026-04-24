@@ -154,7 +154,7 @@ html[data-theme="light"] .theme-icon-moon { display: none;  }
   top: 0;
   width: 24px;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
 }
 
 #seam-path {

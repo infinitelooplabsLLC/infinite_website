@@ -72,9 +72,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
       let d = `M ${cx} 0`;
       for (let i = 0; i < count; i++) {
         const y0 = i * period;
+        const y3 = Math.min((i + 1) * period, h);
+        const span = y3 - y0;
         const x1 = i % 2 === 0 ? cx - amp : cx + amp;
         const x2 = i % 2 === 0 ? cx + amp : cx - amp;
-        d += ` C ${x1} ${y0 + period / 3} ${x2} ${y0 + (2 * period) / 3} ${cx} ${y0 + period}`;
+        d += ` C ${x1} ${y0 + span / 3} ${x2} ${y0 + 2 * span / 3} ${cx} ${y3}`;
       }
 
       seamPath.setAttribute('d', d);
